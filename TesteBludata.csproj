@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Models\DAO\" />
-    <Folder Include="Models\Entity\" />
   </ItemGroup>
 
 </Project>
