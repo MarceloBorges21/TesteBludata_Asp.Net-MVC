@@ -1,0 +1,35 @@
+﻿@model IEnumerable<TesteBludata.Models.Entity.Empresa>
+
+@{
+    ViewData["Title"] = "Lista de Empresas";
+}
+
+<div class="">
+    <button class="btn-dark">Cadastrar Empresa</button>
+</div>
+</br>
+
+<div>
+    <table class="table table-dark table-striped ">
+        <tbody>
+            <tr>
+                <th>Nome</th>
+                <th>UF</th>
+                <th>CPF/CNPJ</th>
+                <th>Editar</th>
+                <th>Excluir</th>
+            </tr>
+
+            @foreach (var empresa in ViewBag.ListEmpresa)
+            {
+                <tr>
+                    <td>@empresa.Nome</td>
+                    <td>@empresa.UF</td>
+                    <td>@empresa.CPF_ou_CNPJ</td>
+                    <td><a href="">Editar</a></td>
+                    <td><a href="">Excluir</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
