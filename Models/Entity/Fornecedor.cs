@@ -12,6 +12,8 @@ namespace TesteBludata.Models.Entity
         public string RG { get; set; }
         public DateFormat Data_Nasc { get; set; }
         public DateTime DateTime_Cadasto { get; set; }
-        
+
+        public string Tipo { get; set; }
+
     }
 }

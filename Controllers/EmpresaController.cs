@@ -12,6 +12,7 @@ namespace TesteBludata.Controllers
             var list = DAO.ListEmpresa().ToList();
             ViewBag.ListEmpresa = list;
             return View(list);
+
         }
     }
 }

@@ -18,7 +18,7 @@ namespace TesteBludata.Models.DAO
                 string sql = "select * from Empresa";
                 using (SqlCommand cmd = new SqlCommand(sql, con))
                 {
-                    using(var reader = cmd.ExecuteReader())
+                    using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -38,11 +38,13 @@ namespace TesteBludata.Models.DAO
             }
             finally
             {
-                con.Close(); 
+                con.Close();
             }
             return listEmpresa;
         }
 
+        public string[] UFsiglas = { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MS", "MT", "MG", "PA", "PB", "PR" 
+                , "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" };
         public List<Empresa> EditForIdEmpresa(int id)
         {
             string sql = "select * from Empresa where Id=" + id;
