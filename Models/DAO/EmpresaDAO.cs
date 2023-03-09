@@ -43,8 +43,7 @@ namespace TesteBludata.Models.DAO
             return listEmpresa;
         }
 
-        public string[] UFsiglas = { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MS", "MT", "MG", "PA", "PB", "PR" 
-                , "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" };
+ 
         public List<Empresa> EditForIdEmpresa(int id)
         {
             string sql = "select * from Empresa where Id=" + id;
