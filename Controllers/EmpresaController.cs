@@ -16,24 +16,12 @@ namespace TesteBludata.Controllers
 
         }
 
-      /*  public ActionResult EditForIdEmpresa(int Id)
+        public ActionResult Edit(int Id)
         {
-                ViewBag.Id = Id;
-
-                var lista = DAO.EditForIdEmpresa(Convert.ToInt32(Id));
-                ViewBag.ListaEdit = lista.ToList();
-
-                foreach (var item in ViewBag.ListaEdit)
-                {
-                    ViewBag.Nome = item.Nome;
-                    ViewBag.Uf = item.UF;
-                    ViewBag.CPF_ou_CNPJ = item.CPF_ou_CNPJ;
-                }
-           
 
             return View();
 
-        }*/
+        }
 
         [HttpPost]
         public JsonResult RegisterEmpresa(Empresa e)
@@ -44,14 +32,16 @@ namespace TesteBludata.Controllers
 
         public JsonResult CarregaDados(int Id)
         {
-            var lista = DAO.EditForIdEmpresa(Id);
+            var lista = DAO.SearchForIdEmpresa(Id);
             return Json(lista);
         }
         [HttpPost]
         public JsonResult EditEmpresa(Empresa e)
         {
             DAO.EditEmpresa(e);
+
             return Json("Dados salvos com sucesso.");
+            
         }
 
         [HttpPost]

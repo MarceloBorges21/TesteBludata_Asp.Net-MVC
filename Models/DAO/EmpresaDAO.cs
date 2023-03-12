@@ -44,7 +44,7 @@ namespace TesteBludata.Models.DAO
         }
 
  
-        public List<Empresa> EditForIdEmpresa(int id)
+        public List<Empresa> SearchForIdEmpresa(int id)
         {
             string sql = "select * from Empresa where Id=" + id;
             using (SqlCommand cmd = new SqlCommand(sql, con))

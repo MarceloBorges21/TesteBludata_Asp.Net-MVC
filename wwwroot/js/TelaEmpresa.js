@@ -1,8 +1,9 @@
-﻿
-$(document).ready(function () {
+﻿$(document).ready(function () {
     $.noConflict();
     validaLetrasENumeros();
+    CarregaDados(id);
 });
+
 const UF = ["AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MS", "MT", "MG", "PA", "PB", "PR"
     , "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"];
 
@@ -12,11 +13,6 @@ for (var i = 0; i < UF.length; i++) {
         '<option value="' + UF[i] + '">' + UF[i] + '</option>';
 }
 
-var ufEdit = document.getElementById("UFEdit");
-for (var i = 0; i < UF.length; i++) {
-    ufEdit.innerHTML = ufEdit.innerHTML +
-        '<option value="' + UF[i] + '">' + UF[i] + '</option>';
-}
 
 function validaLetrasENumeros() {
     var Nome = $("#Nome");
@@ -32,46 +28,51 @@ function validaLetrasENumeros() {
     });
 }
 
-$("#Salvar").click(function () {
-    if (validaDados()) {
+$("#Salvar").click(function ()//id=Salvar, chama o metodo salvar no ajax
+{
+    validaCampos();
+    if (validaCampos()) {
         Register();
     }
 });
 
-function validaDados() {
+function validaCampos() {
     var mensagem = "";
-
+   
     if ($("#Nome").val() == null || $("#Nome").val() == "") {
-        $("#Nome").css({ "border-color": "#F00", "padding": "2px" });
+        $("#Nome").addClass("ErroBorder");
         setTimeout(function () {
-            $("#Nome").css({ "border-color": "", "padding": "1px" });
+            $("#Nome").removeClass("ErroBorder");
+            $("#Nome").addClass("BorderNormal");
         }, 3000);
         mensagem = "1";
     }
     else {
-        $("#Nome").css({ "border-color": "#blue", "padding": "1px" });
+        $("#Nome").addClass("BorderNormal");
     }
 
     if ($("#UF").val() == null || $("#UF").val() == "") {
-        $("#UF").css({ "border-color": "#F00", "padding": "1px" });
+        $("#UF").addClass("ErroBorder");
         setTimeout(function () {
-            $("#UF").css({ "border-color": "", "padding": "1px" });
+            $("#UF").removeClass("ErroBorder");
+            $("#UF").addClass("BorderNormal");
         }, 3000);
         mensagem = "1";
     }
     else {
-        $("#UF").css({ "border-color": "#blue", "padding": "1px" });
+        $("#UF").addClass("BorderNormal");
     }
 
     if ($("#CPF_ou_CNPJ").val() == null || $("#CPF_ou_CNPJ").val() == "") {
-        $("#CPF_ou_CNPJ").css({ "border-color": "#F00", "padding": "1px" });
+        $("#CPF_ou_CNPJ").addClass("ErroBorder");
         setTimeout(function () {
-            $("#CPF_ou_CNPJ").css({ "border-color": "", "padding": "1px" });
+            $("#CPF_ou_CNPJ").removeClass("ErroBorder");
+            $("#CPF_ou_CNPJ").addClass("BorderNormal");
         }, 3000);
         mensagem = "1";
     }
     else {
-        $("#CPF_ou_CNPJ").css({ "border-color": "#blue", "padding": "1px" });
+        $("#CPF_ou_CNPJ").addClass("BorderNormal");
     }
 
     if (mensagem != "") {
@@ -91,22 +92,23 @@ function validaDados() {
     }
 }
 
-function CarregaDados(Id) {
-    debugger
-    console.log(Id)
-    $.ajax
+function CarregaDados(id) {
+  $.ajax
         ({
-            url: "/Empresa/CarregaDados/" + Id,
-            success: function (data) {
-                //$("#Id").val(data.Id);
-                $("#NomeEdit").val(data.Nome);
-                $("#UFEdit").val(data.UF);
-                $("#CPF_ou_CNPJEdit").val(data.CPF_ou_CNPJ);
+            type: "GET",
+            url: "/Empresa/CarregaDados/" + id ,
+            dataType: "json",
+            success: function (dados) {               
+                $("#Id").val(dados.Id);
+                $("#Nome").val(dados.Nome);
+                $("#UF").val(dados.UF);
+                $("#CPF_ou_CNPJ").val(dados.CPF_ou_CNPJ);
+            }, error: function (xhr, textStatus, errorThrown) {
+                console.log("Erro ao buscar os dados de edição: " + errorThrown);
             }
-        });
-
-
+        });       
 }
+
 
 function Register() {
     jQuery.ajax
@@ -141,14 +143,13 @@ function Register() {
         });
 }
 
-function Put() {
+function Edit() {
     jQuery.ajax
         ({
             type: "POST",
             url: "/Empresa/EditEmpresa",
             dataType: "json",
             data: {
-                Id: $("#Id").val(),
                 Nome: $("#Nome").val(),
                 UF: $("#UF").val(),
                 CPF_ou_CNPJ: $("#CPF_ou_CNPJ").val()
@@ -175,7 +176,7 @@ function Put() {
         });
 }
 
-function Excluir(Id) {
+function Delete(Id) {
     if (confirm("Deseja realmente excluir?") == true) {
         jQuery.ajax
             ({

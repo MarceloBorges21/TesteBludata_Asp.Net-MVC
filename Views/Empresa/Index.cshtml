@@ -13,7 +13,7 @@
     </button>
 </div>
 
-</br>
+<br>
 
 <div>
     <table class="table table-dark table-striped ">
@@ -35,11 +35,12 @@
                     <td>@empresa.UF</td>
                     <td>@empresa.CPF_ou_CNPJ</td>
                     <td>
-                        <button type="button" class="btn btn-warning" id="Editar" onclick="CarregaDados(@empresa.Id)"
-                            data-bs-toggle="modal" data-bs-target="#EmpresaEditarModal">Editar</button>
+                        <a class="btn btn-warning" id="Editar" href="/Empresa/Edit/@empresa.Id">
+                            Editar
+                        </a>
                     </td>
                     <td>
-                        <button type="button" onclick="Excluir(@empresa.Id)" class="btn btn-danger"  id="Excluir">Excluir</button>
+                        <button type="button" onclick="Delete(@empresa.Id)" class="btn btn-danger" id="Excluir">Excluir</button>
                     </td>
                 </tr>
             }
@@ -58,6 +59,7 @@
             <div id="resposta" style="display:none;"></div>
             <div class="modal-body">
                 <form class="form-horizontal" id="FormEmpresa">
+                    <input type="hidden" id="Id" name="Id" />
                     <div class="box-body">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Nome</label>
@@ -83,9 +85,9 @@
                         </div>                        
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                Close
+                                Fechar
                             </button>
-                            <button type="button" id="Salvar" class="btn btn-primary">Salvar</button>
+                            <button type="button" id="Salvar"  class="btn btn-primary">Salvar</button>
                         </div>
                     </div>
                 </form>
@@ -94,52 +96,6 @@
     </div>
 </div>
 
-<!-- Modal EditEmpresaModal -->
-<div class="modal fade" id="EmpresaEditarModal" tabindex="-1" aria-labelledby="EmpresaEditarModal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5">Edição de Empresa</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div id="resposta" style="display:none;"></div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="FormEmpresaEditar">
-                    <div class="box-body">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Nome</label>
-                            <div class="mb-3">
-                                <input type="text" class="form-control" id="NomeEdit" name="NomeEdit"
-                                       autocomplete="off" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">UF</label>
-                            <div class="mb-3">
-                                <select id="UFEdit" name="UFEdit" class="form-control">
-                                    <option value="">-- Selecione o estado --</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">CPF/CNPJ</label>
-                            <div class="mb-3">
-                                <input type="text" class="form-control" id="CPF_ou_CNPJEdit" name="CPF_ou_CNPJEdit"
-                                       autocomplete="off" />
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                Close
-                            </button>
-                            <button type="button" id="SalvarEdit" class="btn btn-primary">Salvar</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <script src="~/js/TelaEmpresa.js"></script>

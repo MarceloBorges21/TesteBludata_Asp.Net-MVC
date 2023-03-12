@@ -16,3 +16,11 @@ html {
 body {
   margin-bottom: 60px;
 }
+.ErroBorder {
+    border-color : #F00;
+    padding: 2px;
+}
+.BorderNormal {
+    border-color: none;
+    padding: 1px;
+}
